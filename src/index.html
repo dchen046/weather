@@ -11,15 +11,16 @@
         <div class="middle">
             <div id="content">
                 <div id="search" class="container row">
-                    <div id="search-bar" class="col">
+                    <div id="search-bar" class="col mb-3">
                         <div class="input-group mt-4 w-75">
-                            <input type="text" class="form-control" placeholder="city or zipcode">
-                            <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                            <input id="location" type="text" class="form-control" placeholder="city or zipcode">
+                            <button id="search-btn" class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
+                    <h1 id="search-error" class="d-flex justify-content-center"></h1>
                 </div>
                 <div id="recents" class="row"></div>
-                <div id="search-results" class="row"></div>
+                <div id="search-results" class="d-flex flex-row justify-content-evenly"></div>
             </div>
         </div>
     </main>

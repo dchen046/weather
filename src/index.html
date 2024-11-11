@@ -3,14 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather</title>
+    <link rel="icon" href="./images/favicon.ico">
 </head>
 <body>
-    <h1>Hello</h1>
-
-    <h3>Do What you want</h3>
-
-    <button class="btn btn-primary">button</button>
+    <main>
+        <div class="middle">
+            <div id="content">
+                <div id="search" class="container row">
+                    <div id="search-bar" class="col">
+                        <div class="input-group mt-4 w-75">
+                            <input type="text" class="form-control" placeholder="city or zipcode">
+                            <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="recents" class="row"></div>
+                <div id="search-results" class="row"></div>
+            </div>
+        </div>
+    </main>
     
 </body>
 </html>

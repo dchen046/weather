@@ -1,5 +1,5 @@
 import { apiKey } from "../stuffs/config";
-import { addWeatherCard } from "./display";
+import { recents, addWeatherCard, createRecents } from "./display";
 
 export let weatherData;
 
@@ -15,7 +15,7 @@ const getWeatherData = async (location) => {
         document.getElementById('search-error').textContent = msg;
         throw msg;
     }
-    
+
 }
 
 const displayCards = (amount) => {
@@ -29,8 +29,10 @@ const setSearchBtn = () => {
     btn.addEventListener('click', async () => {
         try {
             document.getElementById('search-results').textContent = '';
+            document.getElementById('recents').textContent = '';
             const city = document.getElementById('location').value;
             weatherData = await getWeatherData(city);
+            saveData(weatherData);
             displayCards(5);
             console.log(weatherData);
         } catch (err) {
@@ -38,6 +40,18 @@ const setSearchBtn = () => {
         }
     });
 };
+
+const saveData = (data) => {
+    for (let i = 0; i < recents.length; ++i) {
+        if (recents[i].address === data.address) {
+            return;
+        }
+    }
+    if (recents.length >= 3) {
+        recents.splice(0, 1);
+    }
+    recents.push(data);
+}
 
 const setSearchBarEvent = () => {
     const bar = document.getElementById('location');
@@ -49,6 +63,8 @@ const setSearchBarEvent = () => {
 }
 
 export const initSearch = () => {
+    // localStorage.setItem('recents', 'a');
     setSearchBtn();
     setSearchBarEvent();
+    createRecents();
 }

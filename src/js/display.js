@@ -13,11 +13,11 @@ const createWeatherCard = (data) => {
     card.classList.add(...cardClasses);
 
     const info = [
-        createDate(data), 
-        createIcon(data), 
+        createDate(data),
+        createIcon(data),
         createTemp(data)
     ];
-    info.forEach( (x) => {
+    info.forEach((x) => {
         card.appendChild(x);
     });
     return card;
@@ -52,14 +52,15 @@ const createIcon = (data) => {
     return icon;
 }
 
-const createTemp = (data, degree = 'F') => {
-    const temp = document.createElement('h4');
-    const val = data.temp;
+export const createTemp = (data, size='h4', degree = 'F') => {
+    const temp = document.createElement(size);
+    let val = data.temp;
     if (degree === 'C') {
-        val = (val - 32) * (5/9);
+        val = (val - 32) * (5 / 9);
     }
-    temp.textContent = `${val}`;
-    return temp; 
+    val = Math.round(val);
+    temp.textContent = `${val}°${degree}`;
+    return temp;
 }
 
 const addRecents = () => {
@@ -71,13 +72,13 @@ const addRecents = () => {
 
 const createRecentCard = (data) => {
     const recentCard = document.createElement('div');
-    const cardClasses = 'container d-flex flex-column justify-content-center recent-card'.split(' ');
+    const cardClasses = 'container d-flex flex-column justify-content-center recent-card mb-3'.split(' ');
     recentCard.classList.add(...cardClasses);
     const cardInfo = [
         createLocation(data),
         createCoords(data)
     ];
-    cardInfo.forEach( x => {
+    cardInfo.forEach(x => {
         recentCard.appendChild(x);
     })
     return recentCard;

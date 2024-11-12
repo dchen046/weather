@@ -1,7 +1,8 @@
 import { apiKey } from "../stuffs/config";
-import { addWeatherCard } from "./display";
+import { recents, addWeatherCard, createRecents } from "./display";
+import { displayForecast } from "./forecast";
 
-export let weatherData;
+let weatherData;
 
 const getWeatherData = async (location) => {
     try {
@@ -15,11 +16,10 @@ const getWeatherData = async (location) => {
         document.getElementById('search-error').textContent = msg;
         throw msg;
     }
-    
 }
 
 const displayCards = (amount) => {
-    for (let i = 0; i < amount; ++i) {
+    for (let i = 1; i <= amount; ++i) {
         addWeatherCard(weatherData.days[i]);
     }
 }
@@ -28,15 +28,30 @@ const setSearchBtn = () => {
     const btn = document.getElementById("search-btn");
     btn.addEventListener('click', async () => {
         try {
-            document.getElementById('search-results').textContent = '';
+            resetContentDivs();
             const city = document.getElementById('location').value;
             weatherData = await getWeatherData(city);
+            saveData(weatherData);
+            displayForecast(weatherData);
             displayCards(5);
+            console.log(weatherData);
         } catch (err) {
             console.log('aaa');
         }
     });
 };
+
+const saveData = (data) => {
+    for (let i = 0; i < recents.length; ++i) {
+        if (recents[i].address === data.address) {
+            return;
+        }
+    }
+    if (recents.length >= 3) {
+        recents.splice(0, 1);
+    }
+    recents.push(data);
+}
 
 const setSearchBarEvent = () => {
     const bar = document.getElementById('location');
@@ -48,6 +63,14 @@ const setSearchBarEvent = () => {
 }
 
 export const initSearch = () => {
+    // localStorage.setItem('recents', 'a');
     setSearchBtn();
     setSearchBarEvent();
+    createRecents();
+}
+
+const resetContentDivs = () => {
+    document.getElementById('search-results').textContent = '';
+    document.getElementById('recents').textContent = '';
+    document.getElementById('forecast').textContent = ' ';
 }

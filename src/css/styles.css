@@ -15,8 +15,23 @@
 #content {
     width: 50%;
     height: 50%;
-    border: 2px solid black;
-    overflow: auto;
+    overflow: hidden;
+}
+
+.card {
+    width: 17%;
+}
+
+.recent-card {
+    width: auto;
+}
+
+#content,
+.card,
+.recent-card {
+    background-color: transparent;
+    border-radius: var(--bs-border-radius);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 }
 
 #search-bar {
@@ -24,7 +39,8 @@
     justify-content: center;
 }
 
-.card {
-    width: 50px;
-    height: 50px;
+@media (max-width: 992px) {
+    #content {
+        width: 75%;
+    }
 }

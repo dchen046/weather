@@ -3,6 +3,7 @@ import { recents, addWeatherCard, createRecents } from "./display";
 import { displayForecast } from "./forecast";
 
 let weatherData;
+export let degree = 'F';
 
 const getWeatherData = async (location) => {
     try {
@@ -31,6 +32,7 @@ const setSearchBtn = () => {
             resetContentDivs();
             const city = document.getElementById('location').value;
             weatherData = await getWeatherData(city);
+            setDegree();
             saveData(weatherData);
             displayForecast(weatherData);
             displayCards(5);
@@ -40,6 +42,14 @@ const setSearchBtn = () => {
         }
     });
 };
+
+const setDegree = () => {
+    if (document.getElementById('degree-toggle').checked) {
+        degree = 'C'; 
+    } else {
+        degree = 'F';
+    }
+}
 
 const saveData = (data) => {
     for (let i = 0; i < recents.length; ++i) {

@@ -1,4 +1,6 @@
+import { degree } from "./search";
 export let recents = [];
+
 
 export const addWeatherCard = (data) => {
     const results = document.getElementById('search-results');
@@ -52,7 +54,7 @@ const createIcon = (data) => {
     return icon;
 }
 
-export const createTemp = (data, size='h4', degree = 'F') => {
+export const createTemp = (data, size='h4') => {
     const temp = document.createElement(size);
     let val = data.temp;
     if (degree === 'C') {

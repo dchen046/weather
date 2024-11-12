@@ -32,6 +32,7 @@ const setSearchBtn = () => {
             const city = document.getElementById('location').value;
             weatherData = await getWeatherData(city);
             displayCards(5);
+            console.log(weatherData);
         } catch (err) {
             console.log('aaa');
         }

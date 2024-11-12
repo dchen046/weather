@@ -9,7 +9,7 @@ export const addWeatherCard = (data) => {
 
 const createWeatherCard = (data) => {
     const card = document.createElement('div');
-    const cardClasses = 'd-flex flex-column justify-content-center text-center container'.split(' ');
+    const cardClasses = 'd-flex flex-column justify-content-center text-center container card mx-auto'.split(' ');
     card.classList.add(...cardClasses);
     const info = [createDate(data), createIcon(data), createTemp(data)];
     info.forEach( (x) => {
@@ -38,9 +38,10 @@ const createIcon = (data) => {
         color = '#74C0FC'
     } else {
         iconClass = 'fas fa-cloud'.split(' ');
+        color = '#B6B6B4';
     }
 
-    iconClass.push('m-3', 'fa-xl');
+    iconClass.push('m-3', 'fa-2xl');
     icon.classList.add(...iconClass);
     icon.setAttribute('style', `color: ${color}`);
     return icon;
